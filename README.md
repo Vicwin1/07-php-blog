@@ -16,7 +16,9 @@ A PHP 8 and MySQL blog CMS for Apache/XAMPP. The public site is served from the 
    Enter and confirm a password of at least 12 characters when prompted.
 5. Open `http://localhost/swd/07-php-blog/` and sign in at `/admin/login.php`.
 
-The web server needs PDO MySQL enabled and write permission for `uploads/`. Cover images are limited to JPEG, PNG, and WebP files up to 5 MB. Admin post editing requires at least one category.
+The web server needs PDO MySQL enabled and write permission for `uploads/`. Cover images are limited to JPEG, PNG, and WebP files up to 2 MB. Admin post editing requires at least one category.
+
+Uploads are checked for a successful HTTP upload, measured from the temporary file against the 2 MB limit, and inspected with `finfo` rather than trusting the browser-supplied filename or MIME type. Only JPEG, PNG, and WebP MIME types are accepted; the server assigns a random filename and fixed extension. Together with the uploads-directory Apache rule, these checks reduce oversized-upload/resource exhaustion, forged-type/script upload, path traversal/filename collision, and uploaded-code execution risks. Replaced and deleted post images are removed.
 
 ## Features
 

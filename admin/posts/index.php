@@ -2,14 +2,31 @@
 declare(strict_types=1);
 require dirname(__DIR__) . '/_layout.php';
 
-$posts = db()->query(
-    'SELECT p.id, p.title, p.slug, p.status, p.updated_at, c.name AS category_name
-     FROM posts p JOIN categories c ON c.id = p.category_id
-     ORDER BY p.updated_at DESC, p.id DESC'
-)->fetchAll();
+$status = (string) ($_GET['status'] ?? '');
+$validStatus = in_array($status, ['draft', 'published'], true) ? $status : '';
+$sql = 'SELECT p.id, p.title, p.slug, p.status, p.updated_at, c.name AS category_name
+        FROM posts p JOIN categories c ON c.id = p.category_id';
+if ($validStatus !== '') {
+    $stmt = db()->prepare($sql . ' WHERE p.status = :status ORDER BY p.updated_at DESC, p.id DESC');
+    $stmt->execute(['status' => $validStatus]);
+    $posts = $stmt->fetchAll();
+} else {
+    $posts = db()->query($sql . ' ORDER BY p.updated_at DESC, p.id DESC')->fetchAll();
+}
 admin_header('Posts');
 ?>
-<div class="page-actions"><a class="button" href="<?= e(url('admin/posts/form.php')) ?>">New post</a></div>
+<div class="page-actions">
+    <form class="filter-form" method="get">
+        <label class="sr-only" for="status-filter">Filter by status</label>
+        <select id="status-filter" name="status" onchange="this.form.submit()">
+            <option value="" <?= $validStatus === '' ? 'selected' : '' ?>>All statuses</option>
+            <option value="draft" <?= $validStatus === 'draft' ? 'selected' : '' ?>>Draft</option>
+            <option value="published" <?= $validStatus === 'published' ? 'selected' : '' ?>>Published</option>
+        </select>
+        <noscript><button type="submit">Filter</button></noscript>
+    </form>
+    <a class="button" href="<?= e(url('admin/posts/form.php')) ?>">New post</a>
+</div>
 <div class="table-wrap"><table><thead><tr><th>Title</th><th>Category</th><th>Status</th><th>Updated</th><th>Actions</th></tr></thead><tbody>
 <?php foreach ($posts as $post): ?>
     <tr>
