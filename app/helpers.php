@@ -75,6 +75,17 @@ function excerpt(string $text, int $length = 180): string
     return rtrim(mb_substr($plain, 0, $length, 'UTF-8')) . '…';
 }
 
+function post_body_html(string $body): string
+{
+    $paragraphs = preg_split('/\R(?:[ \t]*\R)+/u', trim($body)) ?: [];
+    $paragraphs = array_filter($paragraphs, static fn (string $paragraph): bool => trim($paragraph) !== '');
+
+    return implode("\n", array_map(
+        static fn (string $paragraph): string => '<p>' . nl2br(e(trim($paragraph)), false) . '</p>',
+        $paragraphs
+    ));
+}
+
 function store_cover_image(array $file): ?string
 {
     if (($file['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_NO_FILE) {
