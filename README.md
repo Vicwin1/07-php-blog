@@ -4,24 +4,34 @@ A PHP 8 and MySQL blog CMS for Apache/XAMPP. The public site is served from the 
 
 ## Setup
 
-1. Copy the project into `C:\xampp\htdocs\swd\07-php-blog` (or the equivalent document-root folder).
-2. In XAMPP Control Panel, start Apache and MySQL. Enable Apache `mod_rewrite` and `AllowOverride All` for the project directory. The root `.htaccess` uses `RewriteBase /swd/07-php-blog/` for readable `/post/slug` and `/category/slug` routes.
-3. Import [`database.sql`](./database.sql) in phpMyAdmin. Select **Import**, choose `database.sql`, then click **Go**. It creates the `vicwin_fc_blog` database and the `admins`, `categories`, and `posts` tables.
-4. Configure the database connection. Defaults are `127.0.0.1`, database `vicwin_fc_blog`, user `root`, and an empty password. Override these with `DB_HOST`, `DB_NAME`, `DB_USER`, and `DB_PASS` environment variables when needed.
-5. Create an administrator from a terminal:
+1. Copy the project folder into XAMPP's Apache document root. For example:
+   - Windows: `C:\xampp\htdocs\swd\07-php-blog`
+   - macOS: `/Applications/XAMPP/xamppfiles/htdocs/swd/07-php-blog`
+2. Start Apache and MySQL in the XAMPP Control Panel. Enable Apache `mod_rewrite` and `AllowOverride All` for the project directory. The root `.htaccess` uses `RewriteBase /swd/07-php-blog/` for readable `/post/slug` and `/category/slug` routes.
+3. Import [`database.sql`](./database.sql) in phpMyAdmin: select **Import**, choose the file, and click **Go**. The script creates the `vicwin_fc_blog` database and its `admins`, `categories`, and `posts` tables.
+4. The default database connection is `127.0.0.1`, database `vicwin_fc_blog`, user `root`, and an empty password. Override these with `DB_HOST`, `DB_NAME`, `DB_USER`, and `DB_PASS` environment variables when needed.
+5. From a terminal, change to the project folder and create the first administrator:
 
    ```text
+   # Windows
    C:\xampp\php\php.exe create-admin.php "Your Name" you@example.com
+
+   # macOS
+   /Applications/XAMPP/xamppfiles/bin/php create-admin.php "Your Name" you@example.com
    ```
 
    Enter and confirm a password of at least 12 characters when prompted.
-6. To add 12 sample posts and their categories, run:
+6. Optionally add 12 sample posts across four categories:
 
    ```text
+   # Windows
    C:\xampp\php\php.exe seed.php
+
+   # macOS
+   /Applications/XAMPP/xamppfiles/bin/php seed.php
    ```
 
-7. Open `http://localhost/swd/07-php-blog/` and sign in at `http://localhost/swd/07-php-blog/admin/login.php`.
+7. Open `http://localhost/swd/07-php-blog/`. Sign in at `http://localhost/swd/07-php-blog/admin/login.php`.
 
 The web server needs the PDO MySQL, mbstring, and fileinfo extensions enabled, plus write permission for `uploads/`. Cover images are limited to JPEG, PNG, and WebP files up to 2 MB. Admin post editing requires at least one category.
 
@@ -37,25 +47,27 @@ Uploads are checked for a successful HTTP upload, measured from the temporary fi
 
 ## Screenshots
 
-Screenshots of the public homepage, article page, and admin dashboard can be added here.
+Add screenshots of the public homepage, an article page, and the admin dashboard here.
 
 ## Folder structure
 
 ```text
-app/                 Bootstrap, database, helpers, CSRF, and authentication
-admin/               Admin dashboard and post/category management
-assets/              Responsive site stylesheet
-uploads/             Cover image uploads (PHP execution disabled)
-index.php            Public homepage
-post.php             Public article page
-category.php         Public category page
-search.php           Public search page
-database.sql         MySQL database and table definitions
-create-admin.php     CLI admin account creator
-seed.php             CLI sample-content seeder
-.htaccess            Readable post and category URL rewrites
+app/                    Bootstrap, database, helpers, CSRF, and authentication
+admin/                  Admin dashboard, sign-in, and content management
+admin/posts/            Post listing, editor, and deletion
+admin/categories/       Category management
+assets/                 Responsive site stylesheet
+uploads/                Cover images; PHP execution is disabled
+index.php               Public homepage
+post.php                Public article page
+category.php            Public category page
+search.php              Public search page
+database.sql            MySQL database and table definitions
+create-admin.php        CLI-only first-admin creator
+seed.php                CLI-only sample-content seeder
+.htaccess               Readable post and category URL rewrites
 ```
 
 ## Exporting your database from phpMyAdmin
 
-To export the current database to `database.sql`, open phpMyAdmin, select **vicwin_fc_blog**, choose **Export**, select **Custom** and **SQL** as the format, then click **Export**. Save the downloaded file as `database.sql` in the project folder. If you want an export that can recreate the database itself, enable **Add CREATE DATABASE / USE statement** under the custom export options.
+In phpMyAdmin, select **vicwin_fc_blog**, open **Export**, choose **Custom**, and select **SQL** as the format. Enable **Add CREATE DATABASE / USE statement** if the export should recreate the database, then click **Export**. Save the downloaded file as `database.sql` in the project folder, replacing the existing file if you intend to update the schema dump.
