@@ -20,7 +20,7 @@ function admin_header(string $title): void
         <a class="admin-brand" href="<?= e(url('admin/index.php')) ?>">Vicwin FC Blog</a>
         <p class="sidebar-user"><?= e($admin['name'] ?? '') ?></p>
         <nav aria-label="Admin navigation">
-            <a href="<?= e(url('admin/index.php')) ?>">Dashboard</a>
+            <a href="<?= e(url('admin/index.php')) ?>">Admin</a>
             <a href="<?= e(url('admin/posts/index.php')) ?>">Posts</a>
             <a href="<?= e(url('admin/categories/index.php')) ?>">Categories</a>
             <a href="<?= e(url('index.php')) ?>">View site</a>
