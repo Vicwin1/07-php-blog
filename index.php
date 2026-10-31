@@ -30,12 +30,12 @@ $categories = db()->query('SELECT name, slug FROM categories ORDER BY name')->fe
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SWD Blog</title>
+    <title>Vicwin FC Blog</title>
     <link rel="stylesheet" href="<?= e(url('assets/style.css')) ?>">
 </head>
 <body>
 <header class="site-header">
-    <a class="brand" href="<?= e(url()) ?>">SWD Blog</a>
+    <a class="brand" href="<?= e(url()) ?>">Vicwin FC Blog</a>
     <nav aria-label="Main navigation">
         <?php foreach ($categories as $category): ?>
             <a href="<?= e(url('category/' . rawurlencode($category['slug']))) ?>"><?= e($category['name']) ?></a>
@@ -79,6 +79,6 @@ $categories = db()->query('SELECT name, slug FROM categories ORDER BY name')->fe
         </nav>
     <?php endif; ?>
 </main>
-<footer class="site-footer">© <?= date('Y') ?> SWD Blog</footer>
+<footer class="site-footer">© <?= date('Y') ?> Vicwin FC Blog</footer>
 </body>
 </html>

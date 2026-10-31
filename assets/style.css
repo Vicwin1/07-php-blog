@@ -65,12 +65,20 @@ label { display: block; margin: .85rem 0 .35rem; font-weight: 650; }
 .admin-main { width: calc(100% - 245px); margin-left: 245px; padding: 0 2.5rem 3rem; }
 .admin-topbar { display: flex; align-items: center; min-height: 92px; margin-bottom: 1.4rem; border-bottom: 1px solid var(--line); }
 .admin-topbar h1 { margin: 0; font-size: 1.8rem; }
-.stats-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-bottom: 1.3rem; }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.3rem; }
 .stat-card { display: grid; gap: .4rem; padding: 1.3rem; }
 .stat-card span { color: var(--muted); }
 .stat-card strong { font-size: 2rem; }
 .panel { padding: 1.4rem; margin-bottom: 1.3rem; }
 .panel h2 { margin-top: 0; }
+.dashboard-grid { display: grid; grid-template-columns: minmax(0, 2fr) minmax(250px, 1fr); gap: 1.3rem; }
+.panel-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.panel-heading h2 { margin-bottom: 1rem; }
+.dashboard-table { border: 0; }
+.dashboard-table th, .dashboard-table td { padding: .65rem .75rem; }
+.category-count-list { display: grid; gap: .75rem; margin: 0; padding: 0; list-style: none; }
+.category-count-list li { display: flex; justify-content: space-between; gap: 1rem; padding-bottom: .6rem; border-bottom: 1px solid var(--line); }
+.category-count-list strong { min-width: 2rem; color: var(--brand); text-align: right; }
 .button-secondary { background: #e5ecee; color: var(--ink); }
 .button-secondary:hover { background: #d5e0e2; color: var(--ink); }
 .page-actions { display: flex; justify-content: flex-end; margin-bottom: 1rem; }
@@ -108,7 +116,8 @@ th { background: #f8fafb; font-size: .86rem; }
     .sidebar-logout { margin-top: .75rem; }
     .admin-main { width: 100%; margin-left: 0; padding: 0 1rem 2rem; }
     .admin-topbar { min-height: 70px; }
-    .stats-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .dashboard-grid { grid-template-columns: 1fr; gap: .3rem; }
     .inline-form, .category-edit { grid-template-columns: 1fr; }
     .inline-form label { margin-top: .4rem; }
     .table-actions { white-space: normal; }

@@ -8,7 +8,7 @@ require_once __DIR__ . '/auth.php';
 
 if (session_status() !== PHP_SESSION_ACTIVE) {
     $https = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
-    session_name('swd_blog_session');
+    session_name('vicwin_fc_blog_session');
     session_set_cookie_params([
         'lifetime' => 0,
         'path' => base_path() . '/',
@@ -22,8 +22,11 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 
     $now = time();
-    if (isset($_SESSION['last_activity']) && $now - (int) $_SESSION['last_activity'] > 1800) {
-        logout_admin();
+    if (isset($_SESSION['admin'], $_SESSION['last_activity'])
+        && $now - (int) $_SESSION['last_activity'] > 1800) {
+        $_SESSION = [];
+        session_regenerate_id(true);
+        $_SESSION['_flash']['error'] = 'Your session expired. Please sign in again.';
     }
     $_SESSION['last_activity'] = $now;
 }

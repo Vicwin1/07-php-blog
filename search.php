@@ -35,9 +35,9 @@ if ($query !== '') {
 ?>
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Search · SWD Blog</title><link rel="stylesheet" href="<?= e(url('assets/style.css')) ?>"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Search · Vicwin FC Blog</title><link rel="stylesheet" href="<?= e(url('assets/style.css')) ?>"></head>
 <body>
-<header class="site-header"><a class="brand" href="<?= e(url()) ?>">SWD Blog</a><nav><a href="<?= e(url()) ?>">Home</a></nav></header>
+<header class="site-header"><a class="brand" href="<?= e(url()) ?>">Vicwin FC Blog</a><nav><a href="<?= e(url()) ?>">Home</a></nav></header>
 <main class="container">
     <h1>Search posts</h1>
     <form class="search-form" action="<?= e(url('search.php')) ?>" method="get"><label class="sr-only" for="q">Search posts</label><input id="q" name="q" type="search" value="<?= e($query) ?>" placeholder="Search posts…"><button type="submit">Search</button></form>

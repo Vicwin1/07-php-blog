@@ -22,9 +22,9 @@ if ($category) {
 ?>
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title><?= $category ? e($category['name']) . ' · SWD Blog' : 'Category not found' ?></title><link rel="stylesheet" href="<?= e(url('assets/style.css')) ?>"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title><?= $category ? e($category['name']) . ' · Vicwin FC Blog' : 'Category not found' ?></title><link rel="stylesheet" href="<?= e(url('assets/style.css')) ?>"></head>
 <body>
-<header class="site-header"><a class="brand" href="<?= e(url()) ?>">SWD Blog</a><nav><a href="<?= e(url()) ?>">Home</a></nav></header>
+<header class="site-header"><a class="brand" href="<?= e(url()) ?>">Vicwin FC Blog</a><nav><a href="<?= e(url()) ?>">Home</a></nav></header>
 <main class="container">
     <h1><?= $category ? e($category['name']) : 'Category not found' ?></h1>
     <?php if ($category): ?>

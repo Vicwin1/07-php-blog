@@ -1,7 +1,7 @@
-CREATE DATABASE IF NOT EXISTS swd_blog
+CREATE DATABASE IF NOT EXISTS vicwin_fc_blog
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
-USE swd_blog;
+USE vicwin_fc_blog;
 
 CREATE TABLE IF NOT EXISTS admins (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,

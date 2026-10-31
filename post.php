@@ -42,11 +42,11 @@ if (!$post) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?= $post ? e($post['title']) . ' · SWD Blog' : 'Post not found · SWD Blog' ?></title>
+    <title><?= $post ? e($post['title']) . ' · Vicwin FC Blog' : 'Post not found · Vicwin FC Blog' ?></title>
     <link rel="stylesheet" href="<?= e(url('assets/style.css')) ?>">
 </head>
 <body>
-<header class="site-header"><a class="brand" href="<?= e(url()) ?>">SWD Blog</a><nav><a href="<?= e(url()) ?>">Home</a></nav></header>
+<header class="site-header"><a class="brand" href="<?= e(url()) ?>">Vicwin FC Blog</a><nav><a href="<?= e(url()) ?>">Home</a></nav></header>
 <main class="container article-container">
     <?php if ($post): ?>
         <article class="article">

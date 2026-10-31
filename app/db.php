@@ -9,7 +9,7 @@ function db(): PDO
     }
 
     $host = getenv('DB_HOST') ?: '127.0.0.1';
-    $name = getenv('DB_NAME') ?: 'swd_blog';
+    $name = getenv('DB_NAME') ?: 'vicwin_fc_blog';
     $user = getenv('DB_USER') ?: 'root';
     $password = getenv('DB_PASS') ?: '';
     $dsn = sprintf('mysql:host=%s;dbname=%s;charset=utf8mb4', $host, $name);

@@ -12,12 +12,12 @@ function admin_header(string $title): void
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title><?= e($title) ?> · SWD Blog Admin</title>
+        <title><?= e($title) ?> · Vicwin FC Blog Admin</title>
         <link rel="stylesheet" href="<?= e(url('assets/style.css')) ?>">
     </head>
     <body class="admin-body">
     <aside class="admin-sidebar">
-        <a class="admin-brand" href="<?= e(url('admin/index.php')) ?>">SWD Blog</a>
+        <a class="admin-brand" href="<?= e(url('admin/index.php')) ?>">Vicwin FC Blog</a>
         <p class="sidebar-user"><?= e($admin['name'] ?? '') ?></p>
         <nav aria-label="Admin navigation">
             <a href="<?= e(url('admin/index.php')) ?>">Dashboard</a>

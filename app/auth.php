@@ -11,7 +11,9 @@ function current_admin(): ?array
 function require_admin(): void
 {
     if (current_admin() === null) {
-        flash('error', 'Please sign in to continue.');
+        if (!isset($_SESSION['_flash']['error'])) {
+            flash('error', 'Please sign in to continue.');
+        }
         redirect('admin/login.php');
     }
 }

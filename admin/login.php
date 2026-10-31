@@ -15,6 +15,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $admin = $stmt->fetch();
 
     if ($admin && password_verify($password, $admin['password_hash'])) {
+        if (password_needs_rehash($admin['password_hash'], PASSWORD_DEFAULT)) {
+            $rehash = db()->prepare('UPDATE admins SET password_hash = :password_hash WHERE id = :id');
+            $rehash->execute([
+                'password_hash' => password_hash($password, PASSWORD_DEFAULT),
+                'id' => (int) $admin['id'],
+            ]);
+        }
         session_regenerate_id(true);
         $_SESSION['admin'] = [
             'id' => (int) $admin['id'],
@@ -30,10 +37,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Admin login · SWD Blog</title><link rel="stylesheet" href="<?= e(url('assets/style.css')) ?>"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Admin login · Vicwin FC Blog</title><link rel="stylesheet" href="<?= e(url('assets/style.css')) ?>"></head>
 <body class="login-page">
 <main class="login-card">
-    <a class="brand" href="<?= e(url('index.php')) ?>">SWD Blog</a>
+    <a class="brand" href="<?= e(url('index.php')) ?>">Vicwin FC Blog</a>
     <h1>Admin sign in</h1>
     <?php if ($error): ?><div class="notice notice-error"><?= e($error) ?></div><?php endif; ?>
     <form method="post" action="<?= e(url('admin/login.php')) ?>">

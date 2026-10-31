@@ -28,6 +28,10 @@ if (strlen($password) < 12 || !hash_equals($password, $confirmation)) {
 }
 
 try {
+    if ((int) db()->query('SELECT COUNT(*) FROM admins')->fetchColumn() > 0) {
+        fwrite(STDERR, "An administrator already exists; this script only creates the first admin.\n");
+        exit(1);
+    }
     $stmt = db()->prepare('INSERT INTO admins (name, email, password_hash) VALUES (:name, :email, :password_hash)');
     $stmt->execute([
         'name' => $name,
